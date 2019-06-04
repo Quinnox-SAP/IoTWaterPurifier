@@ -1,0 +1,53 @@
+<mvc:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" controllerName="com.controller.ServiceRequestCreation"
+	xmlns:html="http://www.w3.org/1999/xhtml" xmlns:f="sap.ui.layout.form">
+	<App>
+		<pages>
+			<Page title="{i18n>ServReqTitle}" showNavButton="true" navButtonPress="onNavBack">
+				<content>
+					<f:Form>
+						<f:title>
+							<core:Title text="{i18n>ServiceCreationTitle}"/>
+						</f:title>
+						<f:formContainers>
+							<f:FormContainer>
+								<f:formElements>
+									<f:FormElement>
+										<f:label>
+											<Label text="{i18n>Issue}" design="Bold" required="true"></Label>
+										</f:label>
+										<f:fields>
+											<ComboBox id="issue">
+												<core:ListItem text="{i18n>WaterLeakage}"/>
+												<core:ListItem text="{i18n>ProductDamaged}"/>
+												<core:ListItem text="{i18n>ElectricalConnection}"/>
+											</ComboBox>
+										</f:fields>
+									</f:FormElement>
+									<f:FormElement>
+										<f:label>
+											<Label text="{i18n>Comments}" design="Bold" required="true"></Label>
+										</f:label>
+										<f:fields>
+											<Input type="Text" id="comments"></Input>
+										</f:fields>
+									</f:FormElement>
+								</f:formElements>
+							</f:FormContainer>
+						</f:formContainers>
+						<f:layout>
+							<f:ResponsiveGridLayout columnsL="2" labelSpanL="3" columnsM="1" labelSpanM="2" labelSpanS="12"/>
+						</f:layout>
+					</f:Form>
+				</content>
+				<footer>
+					<Toolbar>
+						<content>
+							<ToolbarSpacer></ToolbarSpacer>
+							<Button text="{i18n>Save}" type="Accept" press="onSubmitDialog"></Button>
+						</content>
+					</Toolbar>
+				</footer>
+			</Page>
+		</pages>
+	</App>
+</mvc:View>

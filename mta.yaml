@@ -1,0 +1,47 @@
+ID: freestyle
+_schema-version: '2.1'
+version: 0.0.1
+modules:
+  - name: com
+    type: html5
+    path: com
+    parameters:
+      disk-quota: 256M
+      memory: 256M
+    build-parameters:
+      builder: grunt
+    requires:
+      - name: freestyle
+      - name: IOTAS_CONTROLS
+        group: destinations
+        properties:
+          forwardAuthToken: true
+          strictSSL: false
+          name: IOTAS_CONTROLS
+          url: '~{url}'
+      - name: sapui52
+        group: destinations
+        properties:
+          forwardAuthToken: true
+          strictSSL: false
+          name: sapui52
+          url: '~{url}'
+      - name: LeonardoInstance
+resources:
+      - name: freestyle
+        parameters:
+          path: ./xs-security.json
+          service-plan: application
+        type: com.sap.xs.uaa
+      - name: sapui52
+        properties:
+          url: 'https://sapui5.hana.ondemand.com'
+      - name: IOTAS_CONTROLS
+        properties:
+          url: 'https://sapuiiot.cfapps.eu10.hana.ondemand.com'
+      - name: LeonardoInstance
+        type: org.cloudfoundry.existing-service
+
+ 
+  
+  

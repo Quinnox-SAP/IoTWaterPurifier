@@ -1,0 +1,26 @@
+<mvc:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" controllerName="com.controller.WaterQuality"
+	xmlns:html="http://www.w3.org/1999/xhtml">
+	<App>
+		<pages>
+			<Page title="{i18n>WaterQltyTitle}" showNavButton="true" navButtonPress="onPressBack">
+				<content>
+					<!--<Text text="Total Water Consumed:{}"></Text>-->
+					<VBox alignItems="Center" alignContent="Center">
+						<items>
+							<SegmentedButton>
+								<items>
+									<SegmentedButtonItem text="{i18n>TDS2}" width="auto" press="onTDSInput"></SegmentedButtonItem>
+									<SegmentedButtonItem text="{i18n>pH2}" width="auto" press="onpHInput"></SegmentedButtonItem>
+									<SegmentedButtonItem text="{i18n>TDS1}" width="auto" press="onTDSOutput"></SegmentedButtonItem>
+									<SegmentedButtonItem text="{i18n>pH1}" width="auto" press="onpHOutput"></SegmentedButtonItem>
+								</items>
+							</SegmentedButton>
+							<Text text="" id="idpHText"></Text>
+							<Text text="" id="idTDSText"></Text>
+						</items>
+					</VBox>
+				</content>
+			</Page>
+		</pages>
+	</App>
+</mvc:View>
