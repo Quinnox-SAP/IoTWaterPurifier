@@ -23,6 +23,7 @@ sap.ui.define([
 		},
 		_onObjectMatched: function (oEvent) {
 			var that = this;
+			//hello
 			var filterConsumed = oEvent.getParameter("arguments").FilterConsumed;
 		},
 
