@@ -113,7 +113,15 @@ sap.ui.define([
 
 			var that = this;
 
-			that.getOwnerComponent().getRouter().navTo("WaterQuality");
+			// that.getOwnerComponent().getRouter().navTo("WaterQuality");
+				var oProperty = "Device_IoT_1000020.TDS_Output";
+		    that.getOwnerComponent().getRouter().navTo("TDSOutput", {
+
+				navFrom: "measuredValues",
+				headerTitle: " ",
+				subHeaderTitle: " ",
+				mpPath: oProperty
+			});
 		},
 		onFilterLifePress: function (evt) {
 			// var filterCapacity = 10000;

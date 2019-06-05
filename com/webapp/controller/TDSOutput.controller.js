@@ -1,7 +1,8 @@
 sap.ui.define([
 	"sap/ui/core/mvc/Controller",
-	"sap/ui/iot/elements/IoTEventsOnChartElement"
-], function (Controller,IoTEventsOnChart) {
+	"sap/ui/iot/elements/IoTEventsOnChartElement",
+	"sap/ui/core/routing/History",
+], function (Controller, IoTEventsOnChart, History) {
 	"use strict";
 
 	return Controller.extend("com.controller.TDSOutput", {
@@ -12,14 +13,14 @@ sap.ui.define([
 		 * @memberOf com.view.TDSOutput
 		 */
 		onInit: function () {
-	this.bRenderChart = true;
+			this.bRenderChart = true;
 			this.bNavMp = false;
 			var oRouter = this.getOwnerComponent().getRouter();
 			oRouter.getRoute("TDSOutput").attachMatched(this._onRouteMatched, this);
 			var oModel = new sap.ui.model.json.JSONModel();
 			this.byId("idChart").setModel(oModel, "chartModel");
 		},
-				_onRouteMatched: function (oEvent) {
+		_onRouteMatched: function (oEvent) {
 			//Close the Busy Indicator and retrieve the arguments passed while routing
 			// sap.ui.getCore().byId("idBusy").close();
 			// this.sThingId = oEvent.getParameter("arguments").thingId;
@@ -108,9 +109,13 @@ sap.ui.define([
 		},
 		onPressBack: function () {
 			var that = this;
-			that.getOwnerComponent().getRouter().navTo("WaterQuality");
+			// that.getOwnerComponent().getRouter().navTo("WaterQuality");
+			var sHistory = History.getInstance();
+			var sPreviousHash = sHistory.getPreviousHash();
+			if (sPreviousHash !== undefined) {
+				window.history.go(-1);
+			}
 		}
-
 
 		/**
 		 * Similar to onAfterRendering, but this hook is invoked before the controller's View is re-rendered
