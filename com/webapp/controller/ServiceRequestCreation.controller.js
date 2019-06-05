@@ -32,8 +32,9 @@ sap.ui.define([
 
 		onSubmitDialog: function () {
 			var that = this;
-			var issue = this.getView().byId("issue").getValue();
-			var comments = this.getView().byId("comments").getValue();
+			// var issue = that.getView().byId("issue").getValue();
+			var issue = that.getView().byId("issue").getSelectedItem().getText();
+			var comments = that.getView().byId("comments").getValue();
 			if ((issue !== "") && (comments !== "")) {
 				var faultCode;
 				if (issue === "Water Filter Issue") {

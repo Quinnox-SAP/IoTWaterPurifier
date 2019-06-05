@@ -2,7 +2,7 @@
 	xmlns:html="http://www.w3.org/1999/xhtml">
 	<Page title="{i18n>SrvHisTitle}" showNavButton="true" navButtonPress="onNavBack">
 		<content>
-			<SearchField liveChange="onSearch"></SearchField>
+			<SearchField id="idSearch" liveChange="onSearch"></SearchField>
 			<!--<Label text = "Device Name" id="id1" design="Bold"></Label>-->
 			<Toolbar class="sapUiMediumMarginTop" id="toolbar1">
 				<Label id="id1" design="Bold"></Label>

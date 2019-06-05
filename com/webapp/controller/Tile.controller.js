@@ -113,15 +113,20 @@ sap.ui.define([
 
 			var that = this;
 
-			that.getOwnerComponent().getRouter().navTo("WaterQuality");
-			// var oProperty = "Device_IoT_1000020.TDS_Output";
-			// that.getOwnerComponent().getRouter().navTo("TDSOutput", {
+			// that.getOwnerComponent().getRouter().navTo("WaterQuality");
+			var pHOutput = sap.ui.getCore().pHOutput;
+			// this.getView().byId("idTDSText").setText("");
+			// // this.getView().byId("idpHText").setText(pHOutput);
+			// this.getOwnerComponent().getRouter().navTo("pHOutput");
+			// var oProperty = "DeviceData.pHInput";
+			var oProperty = "Device_IoT_1000020.pH_Output";
+			this.getOwnerComponent().getRouter().navTo("pHOutput", {
 
-			// 	navFrom: "measuredValues",
-			// 	headerTitle: " ",
-			// 	subHeaderTitle: " ",
-			// 	mpPath: oProperty
-			// });
+				navFrom: "measuredValues",
+				headerTitle: " ",
+				subHeaderTitle: " ",
+				mpPath: oProperty
+			});
 		},
 		onFilterLifePress: function (evt) {
 			// var filterCapacity = 10000;

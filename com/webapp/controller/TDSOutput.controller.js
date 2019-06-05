@@ -22,8 +22,8 @@ sap.ui.define([
 		},
 		_onRouteMatched: function (oEvent) {
 			//Close the Busy Indicator and retrieve the arguments passed while routing
-			// sap.ui.getCore().byId("idBusy").close();
-			// this.sThingId = oEvent.getParameter("arguments").thingId;
+			sap.ui.getCore().byId("idBusy").close();
+			this.sThingId = oEvent.getParameter("arguments").thingId;
 			var sHeaderTitle = oEvent.getParameter("arguments").headerTitle;
 			var sSubHeaderTitle = oEvent.getParameter("arguments").subHeaderTitle;
 			this.bNavMp = false;
@@ -84,7 +84,7 @@ sap.ui.define([
 			// Workaround as of now because onAfterRendering does not get called for the second time
 			if (!this.bRenderChart) {
 				oChart.setEventsVisible(false);
-				oChart.setAssetId(sap.ui.getCore().sThingId);
+				oChart.setAssetId(sThingId);
 			}
 		},
 
@@ -107,13 +107,10 @@ sap.ui.define([
 				this.getOwnerComponent().showTimeoutMessage();
 			}
 		},
-		onPressBack: function () {
-			var that = this;
-			// that.getOwnerComponent().getRouter().navTo("WaterQuality");
-			var sHistory = History.getInstance();
-			var sPreviousHash = sHistory.getPreviousHash();
-			if (sPreviousHash !== undefined) {
-				window.history.go(-1);
+		handleNavBackPress: function () {
+			window.history.back();
+			if (this.getOwnerComponent().isTimedOut) {
+				this.getOwnerComponent().showTimeoutMessage();
 			}
 		}
 
