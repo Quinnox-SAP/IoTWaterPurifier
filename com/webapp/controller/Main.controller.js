@@ -162,13 +162,13 @@ sap.ui.define([
 						//navigation code: Pass parameters in manfiest
 						// that.getOwnerComponent().getRouter().navTo("Tile");
 						that.getOwnerComponent().getRouter().navTo("Tile", {
-							deviceId:sap.ui.getCore().deviceId,
-							FaultCode : sap.ui.getCore().faultCode,
-							filterLife:sap.ui.getCore().filterLife,
-							waterConsumption:sap.ui.getCore().waterConsumption,
-							waterFiltered:sap.ui.getCore().waterFiltered ,
-						    mobileNum: that.mobNum,
-						    filterType:sap.ui.getCore().filterType,
+							deviceId: sap.ui.getCore().deviceId,
+							FaultCode: sap.ui.getCore().faultCode,
+							filterLife: sap.ui.getCore().filterLife,
+							waterConsumption: sap.ui.getCore().waterConsumption,
+							waterFiltered: sap.ui.getCore().waterFiltered,
+							mobileNum: that.mobNum,
+							filterType: sap.ui.getCore().filterType,
 						});
 
 					} else {
@@ -253,8 +253,12 @@ sap.ui.define([
 					if (mobileNum === customerPhoneNumber) {
 
 						sap.ui.getCore().validationFlag = "A";
+						// that.actualDevice = oData.DYN_ENT_iot_quinnoxiotcf_iot_new_package__Device_IoT_1000020[
+						// 	"Device_IoT_1000020.Device_ID"];
 						sap.ui.getCore().deviceId = oData.DYN_ENT_iot_quinnoxiotcf_iot_new_package__Device_IoT_1000020[
 							"Device_IoT_1000020.Device_ID"];
+						// sap.ui.getCore().deviceId = "Model2(fe6ff47a-7dee-478d-82d8-d8de156e7361)";
+						// var name = n.slice(37);
 						sap.ui.getCore().deviceStatus = oData.DYN_ENT_iot_quinnoxiotcf_iot_new_package__Device_IoT_1000020[
 							"Device_IoT_1000020.Device_Status"];
 						sap.ui.getCore().faultCode = oData.DYN_ENT_iot_quinnoxiotcf_iot_new_package__Device_IoT_1000020[
@@ -280,13 +284,13 @@ sap.ui.define([
 						//navigation code: Pass parameters in manfiest
 						// that.getOwnerComponent().getRouter().navTo("Tile");
 						that.getOwnerComponent().getRouter().navTo("Tile", {
-								deviceId:sap.ui.getCore().deviceId,
-							FaultCode : sap.ui.getCore().faultCode,
-							filterLife:sap.ui.getCore().filterLife,
-							waterConsumption:sap.ui.getCore().waterConsumption,
-							waterFiltered:sap.ui.getCore().waterFiltered ,
-						    mobileNum: that.mobNum,
-						    filterType:sap.ui.getCore().filterType,
+							deviceId: sap.ui.getCore().deviceId,
+							FaultCode: sap.ui.getCore().faultCode,
+							filterLife: sap.ui.getCore().filterLife,
+							waterConsumption: sap.ui.getCore().waterConsumption,
+							waterFiltered: sap.ui.getCore().waterFiltered,
+							mobileNum: that.mobNum,
+							filterType: sap.ui.getCore().filterType,
 
 						});
 
@@ -376,13 +380,13 @@ sap.ui.define([
 						//navigation code: Pass parameters in manfiest
 						// that.getOwnerComponent().getRouter().navTo("Tile");
 						that.getOwnerComponent().getRouter().navTo("Tile", {
-                          	deviceId:sap.ui.getCore().deviceId,
-							FaultCode : sap.ui.getCore().faultCode,
-							filterLife:sap.ui.getCore().filterLife,
-							waterConsumption:sap.ui.getCore().waterConsumption,
-							waterFiltered:sap.ui.getCore().waterFiltered ,
-						    mobileNum: that.mobNum,
-						    filterType:sap.ui.getCore().filterType,
+							deviceId: sap.ui.getCore().deviceId,
+							FaultCode: sap.ui.getCore().faultCode,
+							filterLife: sap.ui.getCore().filterLife,
+							waterConsumption: sap.ui.getCore().waterConsumption,
+							waterFiltered: sap.ui.getCore().waterFiltered,
+							mobileNum: that.mobNum,
+							filterType: sap.ui.getCore().filterType,
 						});
 
 					} else {
