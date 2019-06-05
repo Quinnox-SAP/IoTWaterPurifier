@@ -13,7 +13,7 @@
 						numberUnit="{oserviceHistory>Status}">
 						<attributes>
 							<!--<ObjectAttribute title="Device Name"></ObjectAttribute>-->
-							<ObjectAttribute title="Fault Code" text="{oserviceHistory>FaultCodeDesc}"></ObjectAttribute>
+							<ObjectAttribute title="Fault Description" text="{oserviceHistory>FaultCodeDesc}"></ObjectAttribute>
 						</attributes>
 					</ObjectListItem>
 				</items>

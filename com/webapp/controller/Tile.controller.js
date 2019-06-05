@@ -2,7 +2,7 @@ sap.ui.define([
 	"sap/ui/core/mvc/Controller",
 	"sap/m/MessageBox",
 	"sap/ui/core/routing/History"
-], function (Controller, MessageBox,History) {
+], function (Controller, MessageBox, History) {
 	"use strict";
 
 	return Controller.extend("com.controller.Tile", {
@@ -113,15 +113,15 @@ sap.ui.define([
 
 			var that = this;
 
-			// that.getOwnerComponent().getRouter().navTo("WaterQuality");
-				var oProperty = "Device_IoT_1000020.TDS_Output";
-		    that.getOwnerComponent().getRouter().navTo("TDSOutput", {
+			that.getOwnerComponent().getRouter().navTo("WaterQuality");
+			// var oProperty = "Device_IoT_1000020.TDS_Output";
+			// that.getOwnerComponent().getRouter().navTo("TDSOutput", {
 
-				navFrom: "measuredValues",
-				headerTitle: " ",
-				subHeaderTitle: " ",
-				mpPath: oProperty
-			});
+			// 	navFrom: "measuredValues",
+			// 	headerTitle: " ",
+			// 	subHeaderTitle: " ",
+			// 	mpPath: oProperty
+			// });
 		},
 		onFilterLifePress: function (evt) {
 			// var filterCapacity = 10000;
@@ -168,16 +168,16 @@ sap.ui.define([
 			console.log(that.FaultCode);
 
 			this.getOwnerComponent().getRouter().navTo("ServiceRequestCreation", {
-					customerID: that.custId,
-				deviceId:that.deviceId,
-			
+				customerID: that.custId,
+				deviceId: that.deviceId,
+
 			});
 		},
 		onPressBack: function () {
 			var that = this;
 			that.getView().byId("id1").setValue("");
 			that.getView().byId("id3").setValue("");
-				var sPreviousHash = History.getInstance().getPreviousHash();
+			var sPreviousHash = History.getInstance().getPreviousHash();
 			if (sPreviousHash !== undefined) {
 				history.go(-1);
 			} else {

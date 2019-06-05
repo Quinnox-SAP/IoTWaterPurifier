@@ -16,10 +16,18 @@
 											<Label text="{i18n>Issue}" design="Bold" required="true"></Label>
 										</f:label>
 										<f:fields>
-											<ComboBox id="issue">
-												<core:ListItem text="{i18n>Water Filter Issue}"/>
-												<core:ListItem text="{i18n>Carbon Filter Issue}"/>
-												<core:ListItem text="{i18n>ElectricalConnection}"/>
+											<ComboBox id="issue" filterSecondaryValues="true">
+												<core:ListItem text="Water Filter Issue"/>
+												<core:ListItem text="Carbon Filter Issue"/>
+												<core:ListItem text="RE Loose Connections"/>
+												<core:ListItem text="No Water"/>
+												<core:ListItem text="Water Not Clear"/>
+												<core:ListItem text="Smell in Water"/>
+												<core:ListItem text="Unit giving Shock"/>
+												<core:ListItem text="No Green Light"/>
+												<core:ListItem text="Unit not Working"/>
+												<core:ListItem text="VC-Burning Smell"/>
+												<core:ListItem text="Low Water Flow"/>
 											</ComboBox>
 										</f:fields>
 									</f:FormElement>

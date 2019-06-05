@@ -38,10 +38,27 @@ sap.ui.define([
 				var faultCode;
 				if (issue === "Water Filter Issue") {
 					faultCode = "Z105";
-				} else if (issue === "Carbon Filter Issue") {
+				} else
+				if (issue === "Carbon Filter Issue") {
 					faultCode = "Z106";
-				} else if (issue === "Electrical Connection") {
+				} else if (issue === "RE Loose Connections") {
 					faultCode = "Z109";
+				} else if (issue === "No Water") {
+					faultCode = "Z521";
+				} else if (issue === "Water Not Clear") {
+					faultCode = "Z522";
+				} else if (issue === "Smell in Water") {
+					faultCode = "Z523";
+				} else if (issue === "Unit giving Shock") {
+					faultCode = "Z524";
+				} else if (issue === "No Green Light") {
+					faultCode = "Z525";
+				} else if (issue === "Unit not Working") {
+					faultCode = "Z526";
+				} else if (issue === "VC-Burning Smell") {
+					faultCode = "Z527";
+				} else if (issue === "Low Water Flow") {
+					faultCode = "Z528";
 				}
 				var data = {};
 				data.Issue = issue;
@@ -63,7 +80,11 @@ sap.ui.define([
 							Action: "OK",
 							onClose: function (oAction) {
 								if (oAction === sap.m.MessageBox.Action.OK) {
-									that.getOwnerComponent().getRouter().navTo("Main");
+									// that.getOwnerComponent().getRouter().navTo("Main");
+									var sPreviousHash = History.getInstance().getPreviousHash();
+									if (sPreviousHash !== undefined) {
+										history.go(-1);
+									}
 								}
 							}
 
@@ -79,6 +100,18 @@ sap.ui.define([
 			}
 
 		},
+		// comboboxChange: function (oEvent) {
+		// 	var newval = oEvent.getParameter("newValue");
+		// 	var key = oEvent.getSource().getSelectedItem();
+
+		// 	if (newval !== "" && key === null) {
+		// 		oEvent.getSource().setValue("");
+		// 		oEvent.getSource().setValueState("Error");
+		// 	} else {
+		// 		oEvent.getSource().setValueState("None");
+		// 	}
+
+		// },
 		onNavBack: function () {
 			var sPreviousHash = History.getInstance().getPreviousHash();
 			if (sPreviousHash !== undefined) {
