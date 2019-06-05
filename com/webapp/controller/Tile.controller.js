@@ -1,7 +1,8 @@
 sap.ui.define([
 	"sap/ui/core/mvc/Controller",
-	"sap/m/MessageBox"
-], function (Controller, MessageBox) {
+	"sap/m/MessageBox",
+	"sap/ui/core/routing/History"
+], function (Controller, MessageBox,History) {
 	"use strict";
 
 	return Controller.extend("com.controller.Tile", {
@@ -14,6 +15,12 @@ sap.ui.define([
 		onInit: function () {
 			this.result = {};
 			this.result.items = [];
+			// to be passed to next screen
+			this.FaultCode = ""; // to be passed to next screen
+			this.deviceId = ""; // to be passed to next screen
+			this.filterType = ""; // to be passed to next screen
+			this.waterFiltered = ""; //to be passed to next screen
+			this.filterLife = "";
 
 			this.odataService = new sap.ui.model.odata.ODataModel("/sap/opu/odata/sap/ZQNX_IOT_SRV/", true);
 			// this.odataService = this.getView().getModel("ZQNX");
@@ -25,7 +32,19 @@ sap.ui.define([
 
 		_onObjectMatched: function (oEvent) {
 			var that = this;
+			that.deviceId = oEvent.getParameter("arguments").deviceId;
+			that.FaultCode = oEvent.getParameter("arguments").FaultCode;
+			var filterLife = oEvent.getParameter("arguments").filterLife;
+			that.filterType = oEvent.getParameter("arguments").filterType;
+			var waterConsumption = oEvent.getParameter("arguments").waterConsumption;
+			that.waterFiltered = oEvent.getParameter("arguments").waterFiltered;
 			var mobNum = oEvent.getParameter("arguments").mobileNum;
+			// var filterConsumed = ((waterFiltered / filterLife) * 100);
+			// filterConsumed = Math.round(filterConsumed);
+			that.filterConsumed = ((that.waterFiltered / filterLife) * 100);
+			that.filterConsumed = Math.round(that.filterConsumed);
+			that.getView().byId("id3").setValue(that.filterConsumed);
+
 			this.odataService.read("/CustomerSet('" + mobNum + "')", null, null, false, function (
 				response) {
 				if (response.ValidPhoneNo === "Success") {
@@ -41,7 +60,7 @@ sap.ui.define([
 				}
 				that.getOwnerComponent().getModel("oCustomer").refresh(true);
 			});
-			var waterConsumption = sap.ui.getCore().waterConsumption;
+			// var waterConsumption = sap.ui.getCore().waterConsumption;
 			this.getView().byId("id1").setValue(waterConsumption);
 
 			//FilterType
@@ -49,8 +68,8 @@ sap.ui.define([
 			//   this.getView().byId("id2").setText(filterType);
 
 			//FilterLife
-			var filterLife = sap.ui.getCore().filterLife;
-			this.getView().byId("id3").setValue(filterLife);
+			// var filterLife = sap.ui.getCore().filterLife;
+			// this.getView().byId("id3").setValue(filterLife);
 		},
 
 		// _onRouteMatched: function () {
@@ -103,11 +122,18 @@ sap.ui.define([
 			// console.log(filterConsumed);
 			// sap.ui.getCore().filterConsumed = ((sap.ui.getCore().waterConsumption / sap.ui.getCore().filterLife) * 100);
 			// sap.ui.getCore().filterConsumed = Math.round(sap.ui.getCore().filterConsumed);
-			var filterConsumed = ((sap.ui.getCore().waterFiltered / sap.ui.getCore().filterLife) * 100);
-			filterConsumed = Math.round(filterConsumed);
+			// var filterConsumed = ((sap.ui.getCore().waterFiltered / sap.ui.getCore().filterLife) * 100);
+			// filterConsumed = Math.round(filterConsumed);
 			var that = this;
+			// that.getView().byId("id3").setValue(filterConsumed);
+			console.log(that.filterConsumed);
+			console.log(that.filterType);
+			console.log(that.waterFiltered);
 			that.getOwnerComponent().getRouter().navTo("FilterLife", {
-				FilterConsumed: filterConsumed,
+				FilterConsumed: that.filterConsumed,
+				filterType: that.filterType,
+				waterFiltered: that.waterFiltered
+
 			});
 			//this.getOwnerComponent().getRouter().navTo("FilterLife");
 		},
@@ -115,6 +141,7 @@ sap.ui.define([
 			var that = this;
 			that.getOwnerComponent().getRouter().navTo("ServiceHistory", {
 				customerID: that.custId,
+				deviceId: that.deviceId,
 			});
 			// var that = this;
 
@@ -128,13 +155,26 @@ sap.ui.define([
 			// });
 		},
 		onServiceRequestPress: function () {
-			this.getOwnerComponent().getRouter().navTo("RouteServiceRequestCreation");
+			var that = this;
+			console.log(that.deviceId);
+			console.log(that.FaultCode);
+
+			this.getOwnerComponent().getRouter().navTo("ServiceRequestCreation", {
+					customerID: that.custId,
+				deviceId:that.deviceId,
+			
+			});
 		},
 		onPressBack: function () {
 			var that = this;
 			that.getView().byId("id1").setValue("");
 			that.getView().byId("id3").setValue("");
-			that.getOwnerComponent().getRouter().navTo("RootView");
+				var sPreviousHash = History.getInstance().getPreviousHash();
+			if (sPreviousHash !== undefined) {
+				history.go(-1);
+			} else {
+				this.getOwnerComponent().getRouter().navTo("Main");
+			}
 
 		}
 

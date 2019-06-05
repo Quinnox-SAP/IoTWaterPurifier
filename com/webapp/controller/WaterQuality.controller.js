@@ -1,6 +1,7 @@
 sap.ui.define([
-	"sap/ui/core/mvc/Controller"
-], function (Controller) {
+	"sap/ui/core/mvc/Controller",
+	"sap/ui/core/routing/History"
+], function (Controller,History) {
 	"use strict";
 
 	return Controller.extend("com.controller.WaterQuality", {
@@ -15,7 +16,14 @@ sap.ui.define([
 		},
 			onPressBack: function () {
 			var that = this;
-			that.getOwnerComponent().getRouter().navTo("Tile");
+		
+				var sPreviousHash = History.getInstance().getPreviousHash();
+			if (sPreviousHash !== undefined) {
+				history.go(-1);
+			} else {
+				this.getOwnerComponent().getRouter().navTo("Tile");
+			}
+
 		},
 				onpHOutput  : function () {
 			var pHOutput = sap.ui.getCore().pHOutput;

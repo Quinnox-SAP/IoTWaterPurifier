@@ -139,6 +139,8 @@ sap.ui.define([
 							"Device_IoT_1000020.Device_Status"];
 						sap.ui.getCore().faultCode = oData.DYN_ENT_iot_quinnoxiotcf_iot_new_package__Device_IoT_1000020[
 							"Device_IoT_1000020.Fault_code"];
+						// that.faultCode = oData.DYN_ENT_iot_quinnoxiotcf_iot_new_package__Device_IoT_1000020[
+						// 	"Device_IoT_1000020.Fault_code"];
 
 						sap.ui.getCore().filterLife = oData.DYN_ENT_iot_quinnoxiotcf_iot_new_package__Device_IoT_1000020[
 							"Device_IoT_1000020.Filter_Life"];
@@ -160,8 +162,13 @@ sap.ui.define([
 						//navigation code: Pass parameters in manfiest
 						// that.getOwnerComponent().getRouter().navTo("Tile");
 						that.getOwnerComponent().getRouter().navTo("Tile", {
-
-							mobileNum: that.mobNum,
+							deviceId:sap.ui.getCore().deviceId,
+							FaultCode : sap.ui.getCore().faultCode,
+							filterLife:sap.ui.getCore().filterLife,
+							waterConsumption:sap.ui.getCore().waterConsumption,
+							waterFiltered:sap.ui.getCore().waterFiltered ,
+						    mobileNum: that.mobNum,
+						    filterType:sap.ui.getCore().filterType,
 						});
 
 					} else {
@@ -273,8 +280,14 @@ sap.ui.define([
 						//navigation code: Pass parameters in manfiest
 						// that.getOwnerComponent().getRouter().navTo("Tile");
 						that.getOwnerComponent().getRouter().navTo("Tile", {
+								deviceId:sap.ui.getCore().deviceId,
+							FaultCode : sap.ui.getCore().faultCode,
+							filterLife:sap.ui.getCore().filterLife,
+							waterConsumption:sap.ui.getCore().waterConsumption,
+							waterFiltered:sap.ui.getCore().waterFiltered ,
+						    mobileNum: that.mobNum,
+						    filterType:sap.ui.getCore().filterType,
 
-							mobileNum: that.mobNum,
 						});
 
 					} else {
@@ -363,8 +376,13 @@ sap.ui.define([
 						//navigation code: Pass parameters in manfiest
 						// that.getOwnerComponent().getRouter().navTo("Tile");
 						that.getOwnerComponent().getRouter().navTo("Tile", {
-
-							mobileNum: that.mobNum,
+                          	deviceId:sap.ui.getCore().deviceId,
+							FaultCode : sap.ui.getCore().faultCode,
+							filterLife:sap.ui.getCore().filterLife,
+							waterConsumption:sap.ui.getCore().waterConsumption,
+							waterFiltered:sap.ui.getCore().waterFiltered ,
+						    mobileNum: that.mobNum,
+						    filterType:sap.ui.getCore().filterType,
 						});
 
 					} else {

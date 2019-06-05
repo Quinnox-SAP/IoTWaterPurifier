@@ -15,8 +15,19 @@ sap.ui.define([
 		onInit: function () {
 			this.result = {};
 			this.result.items = [];
+			this.deviceId = "";
+			this.FaultCode = "";
+			this.customerID = "";
 
 			this.odataService = new sap.ui.model.odata.ODataModel("/sap/opu/odata/sap/ZQNX_IOT_SRV/", true);
+			var oRouter = this.getOwnerComponent().getRouter();
+			oRouter.getRoute("ServiceRequestCreation").attachMatched(this._onObjectMatched, this);
+		},
+		_onObjectMatched: function (oEvent) {
+			var that = this;
+			that.deviceId = oEvent.getParameter("arguments").deviceId;
+			that.FaultCode = oEvent.getParameter("arguments").FaultCode;
+			that.customerID = oEvent.getParameter("arguments").customerID;
 		},
 
 		onSubmitDialog: function () {
@@ -24,16 +35,40 @@ sap.ui.define([
 			var issue = this.getView().byId("issue").getValue();
 			var comments = this.getView().byId("comments").getValue();
 			if ((issue !== "") && (comments !== "")) {
+				var faultCode;
+				if (issue === "Water Filter Issue") {
+					faultCode = "Z105";
+				} else if (issue === "Carbon Filter Issue") {
+					faultCode = "Z106";
+				} else if (issue === "Electrical Connection") {
+					faultCode = "Z109";
+				}
 				var data = {};
 				data.Issue = issue;
 				data.Comment = comments;
-				data.CustomerID = sap.ui.getCore().custId;
+				data.CustomerID = that.customerID;
+				data.DeviceName = that.deviceId;
+
+				data.FaultCode = faultCode;
+				// data.FaultCode = that.FaultCode;
+				// data.DateOfCreation = "";
+				// data.ServiceNumber = "";
 				this.odataService.create("/ServiceRequestSet", data, null, function (odata, response) {
+						console.log(response);
 						var msg = "Service Request " + response.data.ServiceNumber + " Created Sucessfully";
 						that.getView().byId("issue").setValue("");
 						that.getView().byId("comments").setValue("");
-						MessageBox.success(msg);
-						that.getOwnerComponent().getRouter().navTo("RouteHome");
+						MessageBox.success(msg, {
+							title: "Success",
+							Action: "OK",
+							onClose: function (oAction) {
+								if (oAction === sap.m.MessageBox.Action.OK) {
+									that.getOwnerComponent().getRouter().navTo("Main");
+								}
+							}
+
+						});
+
 					},
 					function (odata, response) {
 
@@ -49,8 +84,9 @@ sap.ui.define([
 			if (sPreviousHash !== undefined) {
 				history.go(-1);
 			} else {
-				this.getRouter().navTo("Tile");
+				this.getOwnerComponent().getRouter().navTo("Tile");
 			}
+
 		}
 
 		/**

@@ -17,8 +17,8 @@
 										</f:label>
 										<f:fields>
 											<ComboBox id="issue">
-												<core:ListItem text="{i18n>WaterLeakage}"/>
-												<core:ListItem text="{i18n>ProductDamaged}"/>
+												<core:ListItem text="{i18n>Water Filter Issue}"/>
+												<core:ListItem text="{i18n>Carbon Filter Issue}"/>
 												<core:ListItem text="{i18n>ElectricalConnection}"/>
 											</ComboBox>
 										</f:fields>

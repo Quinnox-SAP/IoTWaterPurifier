@@ -14,7 +14,7 @@
 					</GenericTile>
 					<!--<GenericTile header="{i18n>FilterLife}" subheader="Replace UV Membrane" class="sapUiTinyMargin" press="onFilterLifePress">-->
 					<GenericTile header="{i18n>FilterLife}" class="sapUiTinyMargin" press="onFilterLifePress">
-						<TileContent footer="capacity" unit="litres">
+						<TileContent footer="consumed" unit="%">
 							<content>
 								<NumericContent id="id3" truncateValueTo="10"></NumericContent>
 							</content>

@@ -1,7 +1,8 @@
 sap.ui.define([
 	"sap/ui/core/mvc/Controller",
-	"sap/m/MessageBox"
-], function (Controller, MessageBox) {
+	"sap/m/MessageBox",
+	"sap/ui/core/routing/History"
+], function (Controller, MessageBox,History) {
 	"use strict";
 
 	return Controller.extend("com.controller.FilterLife", {
@@ -25,6 +26,12 @@ sap.ui.define([
 			var that = this;
 			//hello
 			var filterConsumed = oEvent.getParameter("arguments").FilterConsumed;
+			
+			var filterType = oEvent.getParameter("arguments").filterType;
+			var waterFiltered = oEvent.getParameter("arguments").waterFiltered;
+			this.getView().byId("idList").setNumber(filterConsumed);
+			this.getView().byId("id1").setText(filterType);
+			this.getView().byId("id2").setText(waterFiltered);
 		},
 
 		// _onRouteMatched: function () {
@@ -45,7 +52,14 @@ sap.ui.define([
 		// },
 		onNavBack: function () {
 			var that = this;
-			that.getOwnerComponent().getRouter().navTo("Tile");
+				var sPreviousHash = History.getInstance().getPreviousHash();
+			if (sPreviousHash !== undefined) {
+				history.go(-1);
+			} else {
+				this.getOwnerComponent().getRouter().navTo("Tile");
+			}
+			
+		
 			// this.getView().byId("id1").setText("");
 		}
 

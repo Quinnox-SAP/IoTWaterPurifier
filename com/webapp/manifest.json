@@ -152,7 +152,7 @@
 				"target": ["Main"]
 			}, {
 				"name": "Tile",
-				"pattern": "Tile/{mobileNum}",
+				"pattern": "Tile/{deviceId}/{FaultCode}/{filterLife}/{waterConsumption}/{waterFiltered}/{mobileNum}/{filterType}",
 				"target": "Tile"
 			}, {
 				"name": "WaterQuality",
@@ -160,11 +160,11 @@
 				"target": "WaterQuality"
 			}, {
 				"name": "FilterLife",
-				"pattern": "FilterLife/{FilterConsumed}",
+				"pattern": "FilterLife/{FilterConsumed}/{filterType}/{waterFiltered}",
 				"target": "FilterLife"
 			}, {
 				"name": "ServiceHistory",
-				"pattern": "ServiceHistory/{customerID}",
+				"pattern": "ServiceHistory/{customerID}/{deviceId}",
 				"target": "ServiceHistory"
 			}, {
 				"name": "pHOutput",
@@ -183,9 +183,9 @@
 				"pattern": "TDSInput/:navFrom:/:headerTitle:/:subHeaderTitle:/:mpPath:",
 				"target": "TDSInput"
 			}, {
-				"name": "RouteServiceRequestCreation",
-				"pattern": "ServiceRequestCreation",
-				"target": ["ServiceRequestCreation"]
+				"name": "ServiceRequestCreation",
+				"pattern": "ServiceRequestCreation/{customerID}/{deviceId}",
+				"target": "ServiceRequestCreation"
 			}],
 			"targets": {
 				"Main": {

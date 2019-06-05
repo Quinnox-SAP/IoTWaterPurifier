@@ -1,6 +1,8 @@
 sap.ui.define([
-	"sap/ui/core/mvc/Controller"
-], function (Controller) {
+	"sap/ui/core/mvc/Controller",
+	"sap/ui/model/Filter",
+	"sap/ui/core/routing/History"
+], function (Controller, Filter,History) {
 	"use strict";
 
 	return Controller.extend("com.controller.ServiceHistory", {
@@ -22,6 +24,8 @@ sap.ui.define([
 		_onObjectMatched: function (oEvent) {
 			var that = this;
 			var custId = oEvent.getParameter("arguments").customerID;
+			var deviceId = oEvent.getParameter("arguments").deviceId;
+			this.getView().byId("id1").setText(deviceId);
 			this.odataService.read("/ServiceHistorySet?$filter=CustomerID eq '" + custId + "'", null, null, false, function (
 				response) {
 
@@ -31,24 +35,24 @@ sap.ui.define([
 
 			});
 		},
-		// onSearch: function (oEvt) {
-		// 	// add filter for search
-		// 	var aFilters = [];
-		// 	var sQuery = oEvt.getSource().getValue();
-		// 	if (sQuery && sQuery.length > 0) {
-		// 		var filter = new Filter("ServiceNumber", sap.ui.model.FilterOperator.Contains, sQuery);
-		// 		aFilters.push(filter);
-		// 	}
+		onSearch: function (oEvt) {
+			// add filter for search
+			var aFilters = [];
+			var sQuery = oEvt.getSource().getValue();
+			if (sQuery && sQuery.length > 0) {
+				var filter = new Filter("ServiceNumber", sap.ui.model.FilterOperator.Contains, sQuery);
+				aFilters.push(filter);
+			}
 
-		// 	// update list binding
-		// 	var list = this.byId("idList");
-		// 	var binding = list.getBinding("items");
-		// 	binding.filter(aFilters);
-		// }
-		// 	onAfterRendering: function(){
+			// update list binding
+			var list = this.byId("idList");
+			var binding = list.getBinding("items");
+			binding.filter(aFilters);
+		},
+		// onAfterRendering: function () {
 		// 	//DeviceName
-		// 	 var DeviceName = sap.ui.getCore().deviceId;
-		// 	 this.getView().byId("id1").setText(DeviceName);
+		// 	var DeviceName = sap.ui.getCore().deviceId;
+		// 	this.getView().byId("id1").setText(DeviceName);
 		// },
 
 		// 		_onRouteMatched: function () {
@@ -71,7 +75,14 @@ sap.ui.define([
 
 		onNavBack: function () {
 			var that = this;
-			that.getOwnerComponent().getRouter().navTo("Tile");
+				var sPreviousHash = History.getInstance().getPreviousHash();
+			if (sPreviousHash !== undefined) {
+				history.go(-1);
+			} else {
+				this.getOwnerComponent().getRouter().navTo("Tile");
+			}
+
+		
 		}
 
 		/**
