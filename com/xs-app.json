@@ -3,7 +3,8 @@
 	"logout": {
 		"logoutEndpoint": "/do/logout"
 	},
-	"routes": [{
+	"routes": [
+		{
 		"source": "^/com/webapp/(.*)$",
 		"target": "$1",
 		"localDir": "webapp"
@@ -45,6 +46,12 @@
 	}, {
 		"source": "^/resources/(.*)$",
 		"destination": "sapui52",
+		"target": "$1",
+		"csrfProtection": false
+	},
+	{
+		"source": "^/IotWaterPurifier/(.*)$",
+		"destination": "IotWaterPurifier",
 		"target": "$1",
 		"csrfProtection": false
 	}

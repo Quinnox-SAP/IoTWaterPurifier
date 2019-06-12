@@ -1,4 +1,4 @@
-ID: freestyle
+ID: iotCustomerApp
 _schema-version: '2.1'
 version: 0.0.1
 modules:
@@ -11,7 +11,7 @@ modules:
     build-parameters:
       builder: grunt
     requires:
-      - name: freestyle
+      - name: iotCustomerApp
       - name: IOTAS_CONTROLS
         group: destinations
         properties:
@@ -26,9 +26,17 @@ modules:
           strictSSL: false
           name: sapui52
           url: '~{url}'
+      - name: IotWaterPurifier
+        group: destinations
+        properties:
+          forwardAuthToken: false
+          strictSSL: false
+          name: IotWaterPurifier
+          url: '~{url}'
       - name: LeonardoInstance
+      
 resources:
-      - name: freestyle
+      - name: iotCustomerApp
         parameters:
           path: ./xs-security.json
           service-plan: application
@@ -41,6 +49,10 @@ resources:
           url: 'https://sapuiiot.cfapps.eu10.hana.ondemand.com'
       - name: LeonardoInstance
         type: org.cloudfoundry.existing-service
+      - name: IotWaterPurifier
+        properties:
+          url: 'http://103.10.249.29:8000/sap/opu/odata/sap/ZQNX_IOT_SRV/'
+       
 
  
   
